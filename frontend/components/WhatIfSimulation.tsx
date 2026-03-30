@@ -103,28 +103,28 @@ export function WhatIfSimulation({ currentResult, onSimulate }: WhatIfSimulation
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">What-If Simulation</h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">What-If Simulation</h2>
+        <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto px-4">
           Adjust policy parameters to see how changes affect outcomes. Experiment with different scenarios to find the optimal approach.
         </p>
       </div>
 
       {/* Current Policy Summary */}
-      <div className="card bg-gradient-to-r from-primary-50 to-blue-50 border-primary-200">
-        <div className="flex items-center justify-between">
+      <div className="card-responsive bg-gradient-to-r from-primary-50 to-blue-50 border-primary-200">
+        <div className="flex flex-col sm:flex-row items-center justify-between">
           <div>
-            <h3 className="font-semibold text-gray-900 mb-1">Current Policy</h3>
-            <p className="text-sm text-gray-600">
+            <h3 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">Current Policy</h3>
+            <p className="text-sm sm:text-base text-gray-600">
               {currentResult.policy_analysis.sector.replace('_', ' ')} • 
               {currentResult.policy_analysis.implementation_timeframe}
             </p>
           </div>
-          <div className="text-right">
-            <div className="text-sm text-gray-600">Public Support</div>
-            <div className="text-lg font-semibold text-primary-600">
+          <div className="text-right mt-2 sm:mt-0">
+            <div className="text-sm sm:text-base text-gray-600">Public Support</div>
+            <div className="text-lg sm:text-xl font-semibold text-primary-600">
               {currentResult.sentiment.public_support_percentage.toFixed(1)}%
             </div>
           </div>

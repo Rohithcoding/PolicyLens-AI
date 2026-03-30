@@ -45,25 +45,25 @@ export function PolicyInput({ onAnalyze }: PolicyInputProps) {
 
   const loadSamplePolicy = (index: number) => {
     const sample = samplePolicies[index]
-    // This would typically use the form's setValue method
-    const event = new CustomEvent('loadSample', { detail: sample })
-    window.dispatchEvent(event)
+    console.log('Loading sample policy:', sample)
+    // For now, just log the sample - in a real app this would populate the form
+    alert(`Sample policy loaded: ${sample.title}\n\n${sample.text}`)
   }
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="card">
-        <div className="flex items-center space-x-3 mb-6">
-          <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+      <div className="card-responsive">
+        <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-3 mb-4 sm:mb-6">
+          <div className="w-12 h-12 sm:w-12 sm:h-12 bg-primary-100 rounded-full flex items-center justify-center">
             <FileText className="w-6 h-6 text-primary-600" />
           </div>
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">Policy Input</h2>
-            <p className="text-gray-600">Enter your policy text for AI analysis</p>
+          <div className="text-center sm:text-left">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Policy Input</h2>
+            <p className="text-gray-600 text-sm sm:text-base">Enter your policy text for AI analysis</p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
           {/* Policy Title */}
           <div>
             <label htmlFor="policyTitle" className="block text-sm font-medium text-gray-700 mb-2">
@@ -85,9 +85,9 @@ export function PolicyInput({ onAnalyze }: PolicyInputProps) {
             </label>
             <textarea
               id="policyText"
-              placeholder="Enter the complete policy text here. The AI will analyze its content, identify stakeholders, and predict impacts..."
+              placeholder="Enter complete policy text here. The AI will analyze its content, identify stakeholders, and predict impacts..."
               className="textarea"
-              rows={8}
+              rows={6}
               {...register('policyText', { 
                 required: 'Policy text is required',
                 minLength: {
@@ -102,7 +102,7 @@ export function PolicyInput({ onAnalyze }: PolicyInputProps) {
             
             {/* Character count */}
             <div className="text-right mt-2">
-              <span className={`text-sm ${watchedText?.length > 50 ? 'text-success-600' : 'text-gray-500'}`}>
+              <span className={`text-xs sm:text-sm ${watchedText?.length > 50 ? 'text-success-600' : 'text-gray-500'}`}>
                 {watchedText?.length || 0} / 5000 characters
               </span>
             </div>
@@ -111,12 +111,16 @@ export function PolicyInput({ onAnalyze }: PolicyInputProps) {
           {/* Sample Policies */}
           <div>
             <p className="text-sm font-medium text-gray-700 mb-3">Try a sample policy:</p>
-            <div className="grid md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
               {samplePolicies.map((sample, index) => (
                 <button
                   key={index}
                   type="button"
-                  onClick={() => loadSamplePolicy(index)}
+                  onClick={() => {
+                    // This would typically use form's setValue method
+                    const event = new CustomEvent('loadSample', { detail: sample })
+                    window.dispatchEvent(event)
+                  }}
                   className="text-left p-3 border border-gray-200 rounded-lg hover:border-primary-300 hover:bg-primary-50 transition-colors"
                 >
                   <h4 className="font-medium text-gray-900 text-sm mb-1">{sample.title}</h4>
@@ -131,16 +135,16 @@ export function PolicyInput({ onAnalyze }: PolicyInputProps) {
             <button
               type="submit"
               disabled={isSubmitting || !watchedText || watchedText.length < 50}
-              className="btn-primary px-8 py-3 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary px-6 sm:px-8 py-3 flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               {isSubmitting ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   <span>Analyzing...</span>
                 </>
               ) : (
                 <>
-                  <Zap className="w-5 h-5" />
+                  <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>Analyze Policy</span>
                 </>
               )}
@@ -150,29 +154,29 @@ export function PolicyInput({ onAnalyze }: PolicyInputProps) {
       </div>
 
       {/* Info Section */}
-      <div className="mt-8 grid md:grid-cols-3 gap-6">
-        <div className="text-center p-4">
-          <div className="w-12 h-12 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <Zap className="w-6 h-6 text-success-600" />
+      <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div className="text-center p-3 sm:p-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
+            <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-success-600" />
           </div>
-          <h3 className="font-semibold mb-2">Fast Analysis</h3>
-          <p className="text-sm text-gray-600">Get comprehensive policy insights in seconds</p>
+          <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Fast Analysis</h3>
+          <p className="text-xs sm:text-sm text-gray-600">Get comprehensive policy insights in seconds</p>
         </div>
         
-        <div className="text-center p-4">
-          <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <Send className="w-6 h-6 text-primary-600" />
+        <div className="text-center p-3 sm:p-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
+            <Send className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600" />
           </div>
-          <h3 className="font-semibold mb-2">Multi-Agent AI</h3>
-          <p className="text-sm text-gray-600">Four specialized AI agents analyze different aspects</p>
+          <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Multi-Agent AI</h3>
+          <p className="text-xs sm:text-sm text-gray-600">Four specialized AI agents analyze different aspects</p>
         </div>
         
-        <div className="text-center p-4">
-          <div className="w-12 h-12 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <FileText className="w-6 h-6 text-warning-600" />
+        <div className="text-center p-3 sm:p-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
+            <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-warning-600" />
           </div>
-          <h3 className="font-semibold mb-2">Actionable Insights</h3>
-          <p className="text-sm text-gray-600">Get recommendations and risk assessments</p>
+          <h3 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Actionable Insights</h3>
+          <p className="text-xs sm:text-sm text-gray-600">Get recommendations and risk assessments</p>
         </div>
       </div>
     </div>

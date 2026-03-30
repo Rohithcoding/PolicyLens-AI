@@ -72,6 +72,71 @@
   .status-neutral {
     @apply text-gray-600 bg-gray-50;
   }
+
+  /* Responsive utilities - Ensure they work */
+  .container-responsive {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+  
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
+  }
+  
+  .card-responsive {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6;
+  }
+  
+  .btn-responsive {
+    @apply px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .metric-responsive {
+    @apply bg-white rounded-lg p-3 sm:p-4 border border-gray-200 shadow-sm;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Force responsive behavior */
+  @media (max-width: 640px) {
+    .mobile-stack {
+      @apply flex-col space-y-4;
+    }
+    
+    .mobile-full {
+      @apply w-full;
+    }
+    
+    .mobile-center {
+      @apply text-center;
+    }
+  }
+  
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .tablet-horizontal {
+      @apply flex-row space-x-4;
+    }
+    
+    .tablet-center {
+      @apply text-center;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .desktop-spread {
+      @apply justify-between;
+    }
+  }
 }
 
 @layer utilities {
@@ -79,13 +144,31 @@
     @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
   }
   
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
   }
   
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: '0'; }
+    100% { opacity: '1'; }
+  }
+  
+  @keyframes slideUp {
+    0% { transform: 'translateY(10px)'; opacity: '0'; }
+    100% { transform: 'translateY(0)'; opacity: '1'; }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: 'scale(1)'; opacity: '1'; }
+    50% { transform: 'scale(1.05)'; opacity: '0.8'; }
   }
   
   .glass-effect {

@@ -43,15 +43,15 @@ export function SimulationResults({ result }: SimulationResultsProps) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Policy Analysis Results</h2>
-        <div className="flex items-center justify-center space-x-4">
-          <span className={`px-3 py-1 rounded-full text-sm font-medium ${getSentimentColor(result.sentiment.overall_sentiment)}`}>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Policy Analysis Results</h2>
+        <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+          <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getSentimentColor(result.sentiment.overall_sentiment)}`}>
             {result.sentiment.overall_sentiment} Sentiment
           </span>
-          <span className="text-gray-500">|</span>
+          <span className="text-gray-500 text-sm">|</span>
           <span className="text-sm text-gray-600">
             Confidence: {(result.confidence_score * 100).toFixed(0)}%
           </span>
@@ -59,36 +59,36 @@ export function SimulationResults({ result }: SimulationResultsProps) {
       </div>
 
       {/* Policy Overview */}
-      <div className="card">
-        <h3 className="text-xl font-semibold mb-4 flex items-center">
-          <BarChart3 className="w-6 h-6 mr-2 text-primary-600" />
+      <div className="card-responsive">
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center">
+          <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-primary-600" />
           Policy Overview
         </h3>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <h4 className="font-medium text-gray-900 mb-2">Sector</h4>
-            <p className="text-gray-600 capitalize">{result.policy_analysis.sector.replace('_', ' ')}</p>
+            <h4 className="font-medium text-gray-900 mb-2 text-sm sm:text-base">Sector</h4>
+            <p className="text-gray-600 text-sm sm:text-base capitalize">{result.policy_analysis.sector.replace('_', ' ')}</p>
           </div>
           <div>
-            <h4 className="font-medium text-gray-900 mb-2">Implementation Timeframe</h4>
-            <p className="text-gray-600">{result.policy_analysis.implementation_timeframe || 'Not specified'}</p>
+            <h4 className="font-medium text-gray-900 mb-2 text-sm sm:text-base">Implementation Timeframe</h4>
+            <p className="text-gray-600 text-sm sm:text-base">{result.policy_analysis.implementation_timeframe || 'Not specified'}</p>
           </div>
-          <div>
-            <h4 className="font-medium text-gray-900 mb-2">Key Changes</h4>
+          <div className="lg:col-span-2">
+            <h4 className="font-medium text-gray-900 mb-2 text-sm sm:text-base">Key Changes</h4>
             <ul className="space-y-1">
               {result.policy_analysis.key_changes.map((change, index) => (
-                <li key={index} className="text-gray-600 text-sm flex items-start">
-                  <span className="w-2 h-2 bg-primary-400 rounded-full mt-1.5 mr-2 flex-shrink-0" />
+                <li key={index} className="text-gray-600 text-sm sm:text-base flex items-start">
+                  <span className="w-2 h-2 bg-primary-400 rounded-full mt-1.5 sm:mt-2 mr-2 flex-shrink-0" />
                   {change}
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <h4 className="font-medium text-gray-900 mb-2">Affected Stakeholders</h4>
+            <h4 className="font-medium text-gray-900 mb-2 text-sm sm:text-base">Affected Stakeholders</h4>
             <div className="flex flex-wrap gap-2">
               {result.policy_analysis.stakeholders.map((stakeholder, index) => (
-                <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-md">
+                <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs sm:text-sm rounded-md">
                   {stakeholder.replace('_', ' ')}
                 </span>
               ))}

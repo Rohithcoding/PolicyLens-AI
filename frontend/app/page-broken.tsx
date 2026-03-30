@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import { PolicyInput } from '@/components/PolicyInput'
 import { SimulationResults } from '@/components/SimulationResults'
@@ -18,13 +16,11 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'input' | 'results' | 'whatif'>('input')
 
   const handlePolicyAnalysis = async (policyText: string, policyTitle?: string) => {
-    console.log('Starting policy analysis...')
     setIsAnalyzing(true)
     setActiveTab('results')
     
     try {
       const result = await analyzePolicy({ text: policyText, title: policyTitle })
-      console.log('Analysis completed:', result)
       setCurrentResult(result)
       toast.success('Policy analysis completed successfully!')
     } catch (error) {
@@ -32,13 +28,10 @@ export default function Home() {
       toast.error('Failed to analyze policy. Please try again.')
     } finally {
       setIsAnalyzing(false)
-      console.log('Analysis finished, loading state:', false)
     }
   }
 
   const handleWhatIfAnalysis = async (adjustments: Record<string, number>) => {
-    console.log('Starting what-if analysis with adjustments:', adjustments)
-    
     if (!currentResult) {
       toast.error('Please analyze a policy first')
       return
@@ -55,7 +48,6 @@ export default function Home() {
         adjustments
       })
       
-      console.log('What-if analysis completed:', result)
       setCurrentResult(result)
       toast.success('What-if simulation completed!')
     } catch (error) {
@@ -63,7 +55,6 @@ export default function Home() {
       toast.error('Failed to run what-if simulation. Please try again.')
     } finally {
       setIsAnalyzing(false)
-      console.log('What-if analysis finished, loading state:', false)
     }
   }
 
@@ -90,10 +81,7 @@ export default function Home() {
           <div className="flex justify-center mb-6 sm:mb-8">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-1 inline-flex flex-col sm:flex-row w-full sm:w-auto max-w-xs sm:max-w-none">
               <button
-                onClick={() => {
-                  console.log('Switching to input tab')
-                  setActiveTab('input')
-                }}
+                onClick={() => setActiveTab('input')}
                 className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none justify-center ${
                   activeTab === 'input'
                     ? 'bg-primary-600 text-white'
@@ -103,14 +91,7 @@ export default function Home() {
                 1. Policy Input
               </button>
               <button
-                onClick={() => {
-                  console.log('Switching to results tab, currentResult:', currentResult)
-                  if (currentResult) {
-                    setActiveTab('results')
-                  } else {
-                    console.log('No current result, cannot switch to results')
-                  }
-                }}
+                onClick={() => setActiveTab('results')}
                 className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none justify-center ${
                   activeTab === 'results'
                     ? 'bg-primary-600 text-white'
@@ -121,14 +102,7 @@ export default function Home() {
                 2. Results
               </button>
               <button
-                onClick={() => {
-                  console.log('Switching to what-if tab, currentResult:', currentResult)
-                  if (currentResult) {
-                    setActiveTab('whatif')
-                  } else {
-                    console.log('No current result, cannot switch to what-if')
-                  }
-                }}
+                onClick={() => setActiveTab('whatif')}
                 className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none justify-center ${
                   activeTab === 'whatif'
                     ? 'bg-primary-600 text-white'
@@ -187,9 +161,14 @@ export default function Home() {
               <div className="text-center p-4 sm:p-6">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-warning-600" />
+              <div className="text-center">
+                <div className="w-16 h-16 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2">Actionable Insights</h3>
-                <p className="text-sm sm:text-base text-gray-600">Get recommendations and risk assessments</p>
+                <h3 className="text-lg font-semibold mb-2">Real-time Results</h3>
+                <p className="text-gray-600">Instant insights with confidence scores and actionable recommendations</p>
               </div>
             </div>
           )}
