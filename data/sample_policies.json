@@ -1,0 +1,54 @@
+{
+  "sample_policies": [
+    {
+      "title": "Agricultural Reform Bill",
+      "text": "The government proposes to increase agricultural subsidies by 20% and provide low-interest loans to farmers for purchasing modern equipment. This policy aims to boost agricultural productivity and reduce rural poverty. Implementation will occur over 18 months with an estimated budget of $500 million. The program will focus on small and marginal farmers in rural areas.",
+      "sector": "agriculture",
+      "expected_impacts": {
+        "gdp_change": 0.08,
+        "employment_change": 0.05,
+        "poverty_reduction": 0.15
+      }
+    },
+    {
+      "title": "Digital Education Initiative",
+      "text": "Implementation of a nationwide digital education platform providing free online courses and digital literacy programs. The initiative includes distribution of tablets to underserved communities and teacher training programs. Budget allocation of $300 million over 2 years. Target: 10 million students in rural and urban underserved areas.",
+      "sector": "education",
+      "expected_impacts": {
+        "gdp_change": 0.06,
+        "education_improvement": 0.25,
+        "social_inequality": -0.12
+      }
+    },
+    {
+      "title": "Green Energy Transition Act",
+      "text": "A comprehensive policy to transition 50% of energy production to renewable sources by 2030. Includes tax incentives for solar panel installation, wind farm development, and electric vehicle adoption. Estimated investment: $2 billion over 8 years. Creates jobs in renewable energy sector while reducing carbon emissions.",
+      "sector": "environment",
+      "expected_impacts": {
+        "gdp_change": 0.12,
+        "employment_change": 0.08,
+        "inflation_impact": 0.02
+      }
+    },
+    {
+      "title": "Universal Healthcare Access",
+      "text": "Expansion of healthcare coverage to include 100 million additional citizens. Focus on preventive care and rural health infrastructure. Budget increase of $1.2 billion annually. Implementation in phases over 3 years. Partnerships with private hospitals and telemedicine providers.",
+      "sector": "healthcare",
+      "expected_impacts": {
+        "healthcare_access": 0.35,
+        "poverty_reduction": 0.08,
+        "budget_impact": 1200
+      }
+    },
+    {
+      "title": "Small Business Tax Reform",
+      "text": "Reduction in corporate tax rate for small businesses from 25% to 18%. Simplified tax filing process and digital compliance system. Expected to benefit 2 million small enterprises. Revenue loss estimated at $8 billion annually, offset by increased economic activity.",
+      "sector": "taxation",
+      "expected_impacts": {
+        "gdp_change": 0.15,
+        "employment_change": 0.12,
+        "budget_impact": -8000
+      }
+    }
+  ]
+}
